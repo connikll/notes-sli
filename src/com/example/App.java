@@ -3,6 +3,7 @@ package com.example;
 public class App {
 
     public static void main(String[] args) {
+
         String cmd = null;
         String text = null;
         Integer id = null;
@@ -24,15 +25,16 @@ public class App {
             System.out.println("Added #" + newId);
         }
 
+
         else if ("list".equals(cmd)) {
             var notes = store.loadNotes();
-            if (notes.isEmpty()) {
-                System.out.println("(empty)");
-                return;
-            }
             for (String[] n : notes) {
                 System.out.println(n[0] + ";" + n[1]);
             }
+        }
+
+        else if ("count".equals(cmd)) {
+            System.out.println(store.count());
         }
 
         else if ("rm".equals(cmd)) {
@@ -41,11 +43,9 @@ public class App {
                 return;
             }
             boolean ok = store.remove(id);
-            if (!ok) System.out.println("Not found #" + id);
-        }
-
-        else if ("count".equals(cmd)) {
-            System.out.println(store.count());
+            if (!ok) {
+                System.out.println("Not found #" + id);
+            }
         }
 
         else {
